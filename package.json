@@ -2,7 +2,7 @@
   "name": "bingo",
   "version": "0.1.0",
   "private": true,
-  "hompage": "http://gitname.github.io/bingo-react-js",
+  "hompage": "https://ramkumar897003.github.io/bingo-react-js/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
