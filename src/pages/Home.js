@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
-import Ripples from "react-ripples";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 
 import actions from "../redux/actions";
+import Card from "../components/Card";
 
 const Home = ({ data = [] }) => {
   const confettiRef = useRef(null);
@@ -112,7 +112,7 @@ const Home = ({ data = [] }) => {
   const colCenter = Math.floor(data.length / 2);
 
   return (
-    <div>
+    <div data-testid="home">
       <Confetti
         ref={confettiRef}
         width={width}
@@ -128,26 +128,16 @@ const Home = ({ data = [] }) => {
           {data.map((item, key) => (
             <div key={key} className="row">
               {item.map((child, k) => (
-                <Ripples key={child.id} onClick={() => handleClick(key, k)}>
-                  <div className={`card${child.done ? " card-done" : ""}`}>
-                    <div
-                      className={`${
-                        rowCenter === key && colCenter === k
-                          ? ""
-                          : "card-wrapper"
-                      }${
-                        rowCenter === key && colCenter === k ? " center" : ""
-                      } item-${child.id}`}
-                    >
-                      {rowCenter === key && colCenter === k ? null : (
-                        <div className="number">{key * item.length + k}</div>
-                      )}
-                      <div className={child.done ? " done" : ""}>
-                        {child.title}
-                      </div>
-                    </div>
-                  </div>
-                </Ripples>
+                <Card
+                  key={child.id}
+                  onClick={() => handleClick(key, k)}
+                  k={k}
+                  child={child}
+                  colCenter={colCenter}
+                  rowCenter={rowCenter}
+                  index={key}
+                  item={item}
+                />
               ))}
             </div>
           ))}
