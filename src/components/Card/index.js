@@ -35,7 +35,7 @@ const Card = ({
       {empty ? (
         <>{renderCard()}</>
       ) : (
-        <Ripples onClick={onClick} data-testid="card">
+        <Ripples onClick={child.done ? () => {} : onClick} data-testid="card">
           {renderCard()}
         </Ripples>
       )}

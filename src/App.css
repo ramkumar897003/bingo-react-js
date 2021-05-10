@@ -15,24 +15,23 @@ body * {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: rgb(227, 255, 233);
+  background: rgb(246, 222, 162);
   background: linear-gradient(
     90deg,
-    rgba(227, 255, 233, 1) 30%,
-    rgba(218, 232, 255, 1) 70%
+    rgba(246, 222, 162, 1) 30%,
+    rgba(255, 253, 218, 1) 70%
   );
 }
 
 .content {
   box-shadow: 1px 1px 10px 0px rgb(0 0 0 / 20%);
   transform: rotate(-1deg);
-  border: 1px dashed #000;
 }
 
 .row {
@@ -81,7 +80,7 @@ body * {
   justify-content: center;
 }
 .completed-card-wrapper {
-  background: #e5fee2;
+  background: #facc025a;
 }
 
 @media only screen and (max-width: 1200px) {
