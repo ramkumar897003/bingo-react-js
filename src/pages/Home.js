@@ -11,6 +11,10 @@ const Home = ({ data = [] }) => {
   const { width, height } = useWindowSize();
   const [reward, setReward] = useState(false); //This is used to enable/disable rewards
   const [rightDiagonal, setRightDiagonal] = useState(false);
+  const [leftDiagonal, setLeftDiagonal] = useState(false);
+
+  const rowCenter = Math.floor(data.length && data[0].length / 2);
+  const colCenter = Math.floor(data.length / 2);
 
   useEffect(() => {
     actions.getData();
@@ -28,49 +32,75 @@ const Home = ({ data = [] }) => {
   //This function is responsible to check if row/column/diagonal elements are completed
   const checkIfCompleted = (first, second) => {
     const rows = data[first];
+    const centerElement = data[rowCenter][colCenter].id;
 
     //Check if row of clicked element is completed
-    const rowCompleted = rows.every((item) => {
-      return item.done === true;
-    });
+    const rowCompleted = rows
+      .filter((item) => item.id !== centerElement)
+      .every((item) => {
+        return item.done === true;
+      });
 
     //Check if column of clicked element is completed
-    const colCompleted = rows.every((item, key) => {
-      return data[key][second].done === true;
+    const colsArr = [];
+    rows.forEach((item, key) => {
+      colsArr.push(data[key][second]);
     });
+    const colCompleted = colsArr
+      .filter((item) => item.id !== centerElement)
+      .every((item, key) => {
+        return item.done === true;
+      });
 
     //Check if left diagonal elements are completed
-    const leftDiagonalCompleted = data.every((item, key) => {
-      return first === second && data[key][key].done === true;
+    const leftArr = [];
+    data.forEach((item, key) => {
+      leftArr.push(data[key][key]);
     });
 
+    const leftDiagonalCompleted = leftArr
+      .filter((item) => item.id !== centerElement)
+      .every((item, key) => {
+        return item.done === true;
+      });
+
     //Check if right diagonal elements are completed
-    const rightDiagonalCompleted = data.every((item, key) => {
-      return data[key][data.length - key - 1].done === true;
+    const rightArr = [];
+    data.forEach((item, key) => {
+      rightArr.push(data[key][data.length - key - 1]);
     });
+    const rightDiagonalCompleted = rightArr
+      .filter((item) => item.id !== centerElement)
+      .every((item, key) => {
+        return item.done === true;
+      });
 
     //Add completed class to completed row
     if (rowCompleted) {
       rows.forEach((element) => {
-        document
-          .querySelector(`.item-${element.id}`)
-          .classList.add("completed-card-wrapper");
+        if (element.id !== centerElement) {
+          document
+            .querySelector(`.item-${element.id}`)
+            .classList.add("completed-card-wrapper");
+        }
       });
     }
 
     //Add completed class to completed column
     if (colCompleted) {
       rows.forEach((element, key) => {
-        document
-          .querySelector(`.item-${data[key][second].id}`)
-          .classList.add("completed-card-wrapper");
+        if (data[key][second].id !== centerElement) {
+          document
+            .querySelector(`.item-${data[key][second].id}`)
+            .classList.add("completed-card-wrapper");
+        }
       });
     }
 
     //Add completed class to completed left diagonal
     if (leftDiagonalCompleted) {
       rows.forEach((element, key) => {
-        if (first === second) {
+        if (first === second && data[key][key].id !== centerElement) {
           document
             .querySelector(`.item-${data[key][key].id}`)
             .classList.add("completed-card-wrapper");
@@ -81,21 +111,26 @@ const Home = ({ data = [] }) => {
     //Add completed class to completed right diagonal
     if (rightDiagonalCompleted) {
       rows.forEach((element, key) => {
-        document
-          .querySelector(`.item-${data[key][data.length - key - 1].id}`)
-          .classList.add("completed-card-wrapper");
+        if (data[key][data.length - key - 1].id !== centerElement) {
+          document
+            .querySelector(`.item-${data[key][data.length - key - 1].id}`)
+            .classList.add("completed-card-wrapper");
+        }
       });
     }
 
     if (
       rowCompleted ||
       colCompleted ||
-      leftDiagonalCompleted ||
+      (leftDiagonalCompleted && !leftDiagonal) ||
       (rightDiagonalCompleted && !rightDiagonal)
     ) {
       showReward();
       if (rightDiagonalCompleted && !rightDiagonal) {
         setRightDiagonal(true);
+      }
+      if (leftDiagonalCompleted && !leftDiagonal) {
+        setLeftDiagonal(true);
       }
     }
   };
@@ -108,13 +143,11 @@ const Home = ({ data = [] }) => {
     }, 1000);
   };
 
-  const rowCenter = Math.floor(data.length && data[0].length / 2);
-  const colCenter = Math.floor(data.length / 2);
-
   return (
     <div data-testid="home">
       <Confetti
         ref={confettiRef}
+        gravity={0.3}
         width={width}
         height={height}
         numberOfPieces={reward ? 1000 : 0}
@@ -137,6 +170,7 @@ const Home = ({ data = [] }) => {
                   rowCenter={rowCenter}
                   index={key}
                   item={item}
+                  empty={rowCenter === key && colCenter === k}
                 />
               ))}
             </div>
