@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/bingo-react-js/static/css/main.3ba898d7.chunk.css",
-    "main.js": "/bingo-react-js/static/js/main.2727393b.chunk.js",
-    "main.js.map": "/bingo-react-js/static/js/main.2727393b.chunk.js.map",
+    "main.js": "/bingo-react-js/static/js/main.b0de1693.chunk.js",
+    "main.js.map": "/bingo-react-js/static/js/main.b0de1693.chunk.js.map",
     "runtime-main.js": "/bingo-react-js/static/js/runtime-main.4b0f49e7.js",
     "runtime-main.js.map": "/bingo-react-js/static/js/runtime-main.4b0f49e7.js.map",
-    "static/js/2.f40be087.chunk.js": "/bingo-react-js/static/js/2.f40be087.chunk.js",
-    "static/js/2.f40be087.chunk.js.map": "/bingo-react-js/static/js/2.f40be087.chunk.js.map",
+    "static/js/2.cbf33c25.chunk.js": "/bingo-react-js/static/js/2.cbf33c25.chunk.js",
+    "static/js/2.cbf33c25.chunk.js.map": "/bingo-react-js/static/js/2.cbf33c25.chunk.js.map",
     "static/js/3.1bd68d84.chunk.js": "/bingo-react-js/static/js/3.1bd68d84.chunk.js",
     "static/js/3.1bd68d84.chunk.js.map": "/bingo-react-js/static/js/3.1bd68d84.chunk.js.map",
     "index.html": "/bingo-react-js/index.html",
     "static/css/main.3ba898d7.chunk.css.map": "/bingo-react-js/static/css/main.3ba898d7.chunk.css.map",
-    "static/js/2.f40be087.chunk.js.LICENSE.txt": "/bingo-react-js/static/js/2.f40be087.chunk.js.LICENSE.txt"
+    "static/js/2.cbf33c25.chunk.js.LICENSE.txt": "/bingo-react-js/static/js/2.cbf33c25.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4b0f49e7.js",
-    "static/js/2.f40be087.chunk.js",
+    "static/js/2.cbf33c25.chunk.js",
     "static/css/main.3ba898d7.chunk.css",
-    "static/js/main.2727393b.chunk.js"
+    "static/js/main.b0de1693.chunk.js"
   ]
 }
